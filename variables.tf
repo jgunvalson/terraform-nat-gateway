@@ -1,5 +1,9 @@
-variable "eip_private_ip" {
+variable "name" {
   type = string
+}
+
+variable "eip_private_ip" {
+  type    = string
   default = null
 }
 

@@ -1,5 +1,5 @@
 resource "aws_eip" "elastic-ip" {
-  vpc = true
+  vpc                       = true
   associate_with_private_ip = var.eip_private_ip
 }
 
@@ -8,7 +8,7 @@ resource "aws_nat_gateway" "nat-gateway" {
   subnet_id     = var.public_subnet_id
 
   tags = {
-    Name = "${var.name}-${var.aws_subnet_id}"
+    Name = "${var.name}-${var.public_subnet_id}"
   }
 
   # To ensure proper ordering, it is recommended to add an explicit dependency
@@ -21,7 +21,7 @@ data "aws_route_table" "private-subnet-route-table" {
 }
 
 resource "aws_route" "route" {
-  route_table_id            = data.aws_route_table.private-subnet-route-table.id
-  nat_gateway_id =          aws_nat_gateway.nat-gateway.id
-  destination_cidr_block    = "0.0.0.0/0"
+  route_table_id         = data.aws_route_table.private-subnet-route-table.id
+  nat_gateway_id         = aws_nat_gateway.nat-gateway.id
+  destination_cidr_block = "0.0.0.0/0"
 }
