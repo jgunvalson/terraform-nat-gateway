@@ -14,3 +14,7 @@ variable "public_subnet_id" {
 variable "private_subnet_id" {
   type = string
 }
+
+variable "vpc_id" {
+  type = string
+}
